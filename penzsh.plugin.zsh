@@ -133,8 +133,10 @@ function pzcore_func_require()
 	fi
 }
 
-function penzsh_cmd_do(){}
-function penzsh_cmd_info(){}
+function penzsh_cmd_do(){ true}
+
+function penzsh_cmd_info(){ true}
+
 
 function penzsh_create_host_dir() {
 	#1 - Root host directory
