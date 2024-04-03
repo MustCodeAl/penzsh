@@ -60,25 +60,25 @@ function update_current_penzsh_vars() {
 	for var in $(env | egrep "^PENZSH_PROXY" | cut -d= -f1) ; do
 		unset ${var}
 	done
-	export PENZSH=true
+	export PENZSH=false
 	export PENZSH_PROXY_NET=false
 	export PENZSH_PROXY_HOST=false
 	# Are we in a penzsh project?
 	fc -P
 	local x=`pwd`
 	while [ "$x" != "/" ] ; do
-		if [ `find "$x" -maxdepth 1 -name .penzsh -type d 2>/dev/null` ] ; then
+		if [ `fd -HI -d 1 -t d .penzsh $x > /dev/null 2>&1` ] ; then
 			export PENZSH=true
 			export PENZSH_DIR=$x
 			export PENZSH_DIR_META=$x/.penzsh
 			export PENZSH_FIRST_DIR=$x
 			export PENZSH_FIRST_TARGET=$(bat $x/.penzsh/target)
 			break
-		elif [ `find "$x" -maxdepth 1 -name .penzsh_proxy_net -type d 2>/dev/null` ] ; then
+		elif [ `fd -HI -d 1 -t d .penzsh_proxy_net $x > /dev/null 2>&1` ] ; then
 			export PENZSH_PROXY_NET=true
 			export PENZSH_PROXY_NET_DIR=$x
 			export PENZSH_PROXY_NET_TARGET=$(bat $x/.penzsh_proxy_net/target)
-		elif [ `find "$x" -maxdepth 1 -name .penzsh_proxy_host -type d 2>/dev/null` ] ; then
+		elif [ `fd -HI -d 1 -t d .penzsh_proxy_host $x > /dev/null 2>&1` ] ; then
 			export PENZSH_PROXY_HOST=true
 			export PENZSH_PROXY_HOST_DIR=$x
 		fi
@@ -102,7 +102,7 @@ function update_current_penzsh_vars() {
 		fi
 
 		export PENZSH_RHOST=${PENZSH_TARGET}
-		export PENZSH_LHOST=${$(ip route get $PENZSH_FIRST_TARGET | grep -oP "(?<=src )(.*)(?= uid)"):-0.0.0.0}
+		export PENZSH_LHOST=${$(ip route get $PENZSH_FIRST_TARGET | grep -oP "(?<=src )(.*)(?= uid)"):-0.0.0. grep -oP "(?<=src )(.*)(?= uid)"):-0.0.0.0}
 		export pzip=$PENZSH_TARGET
 		fc -p $PENZSH_DIR_META/history
 	fi
