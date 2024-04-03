@@ -45,7 +45,7 @@ function prompt_penzsh() {
 			pzsh_text="${PENZSH_TARGET}"
 		fi
 		
-		p10k segment -r -i ${pzsh_icon} -b red -t ${pzsh_text} 2>/dev/null
+		p10k segment -r -i ${pzsh_icon} -t ${pzsh_text} 2>/dev/null
 	fi
 }
 
@@ -110,7 +110,7 @@ function update_current_penzsh_vars() {
 update_current_penzsh_vars
 
 function penzsh_echo() {
-	printf "\\033[31mPENZSH >>> %s\\033[0m\\n" "${@}"
+	echo "PENZSH >>> ${@}"
 }
 
 # stolen from cmds/.core ...
