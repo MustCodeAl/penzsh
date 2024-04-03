@@ -4,6 +4,9 @@ Pentesting Framework for Oh-My-Zsh/PowerLevel10K
 ![Screenshot of penzsh in action](penzsh.png)
 
 ## Installation
+
+***Must have [fd](https://github.com/sharkdp/fd) installed***
+
 For Oh My Zsh, git clone into $ZSH_CUSTOM/plugins/penzsh
 
 Add 'penzsh' to the list of plugins in ~/.zshrc

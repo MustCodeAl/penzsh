@@ -40,7 +40,7 @@ pz_proxy_save "type" "$pz_proxy_type"
 pz_proxy_save "method" "$pz_proxy_method"
 ##### Proxychains Configuration Generation
 proxyconf="$PENZSH_PROXY_NET_DIR/.penzsh_proxy_net/proxychains.conf"
-bat << EOF > ${proxyconf}
+cat << EOF > ${proxyconf}
 strict_chain
 quiet_mode
 proxy_dns

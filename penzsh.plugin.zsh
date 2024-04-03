@@ -77,12 +77,12 @@ function update_current_penzsh_vars() {
 			export PENZSH_DIR=$x
 			export PENZSH_DIR_META=$x/.penzsh
 			export PENZSH_FIRST_DIR=$x
-			export PENZSH_FIRST_TARGET=$(bat $x/.penzsh/target)
+			export PENZSH_FIRST_TARGET=$(cat $x/.penzsh/target)
 			break
 		elif [ `fd -HI -d 1 -t d .penzsh_proxy_net` ] ; then
 			export PENZSH_PROXY_NET=true
 			export PENZSH_PROXY_NET_DIR=$x
-			export PENZSH_PROXY_NET_TARGET=$(bat $x/.penzsh_proxy_net/target)
+			export PENZSH_PROXY_NET_TARGET=$(cat $x/.penzsh_proxy_net/target)
 		elif [ `fd -HI -d 1 -t d .penzsh_proxy_host` ] ; then
 			export PENZSH_PROXY_HOST=true
 			export PENZSH_PROXY_HOST_DIR=$x
@@ -94,16 +94,16 @@ function update_current_penzsh_vars() {
 		if ( $PENZSH_PROXY_HOST ) ; then
 			export PENZSH_DIR=$PENZSH_PROXY_HOST_DIR
 			export PENZSH_DIR_META=$PENZSH_PROXY_HOST_DIR/.penzsh_proxy_host
-			export PENZSH_TARGET=$(bat $PENZSH_DIR_META/target)
-			export PENZSH_OS=$(bat $PENZSH_DIR_META/os)
+			export PENZSH_TARGET=$(cat $PENZSH_DIR_META/target)
+			export PENZSH_OS=$(cat $PENZSH_DIR_META/os)
 		elif ( $PENZSH_PROXY_NET ) ; then
 			export PENZSH_DIR=$PENZSH_PROXY_NET_DIR
 			export PENZSH_DIR_META=$PENZSH_PROXY_NET_DIR/.penzsh_proxy_net
-			export PENZSH_TARGET=$(bat $PENZSH_DIR_META/target)
-			export PENZSH_OS=$(bat $PENZSH_DIR_META/os)
+			export PENZSH_TARGET=$(cat $PENZSH_DIR_META/target)
+			export PENZSH_OS=$(cat $PENZSH_DIR_META/os)
 		else
-			export PENZSH_TARGET=$(bat $PENZSH_DIR_META/target)
-			export PENZSH_OS=$(bat $PENZSH_DIR_META/os)
+			export PENZSH_TARGET=$(cat $PENZSH_DIR_META/target)
+			export PENZSH_OS=$(cat $PENZSH_DIR_META/os)
 		fi
 
 		export PENZSH_RHOST=${PENZSH_TARGET}
@@ -233,7 +233,7 @@ function penzsh() {
 			fi
 			;;
 		todos)
-			bat -n $PENZSH_DIR_META/todo
+			cat -n $PENZSH_DIR_META/todo
 			;;
 		todone)
 			local TODO_N=$(($2+0))
@@ -296,7 +296,7 @@ function penzsh() {
 			;;
 		proxyhostenum)
 			if [[ $PENZSH_PROXY_NET && !$PENZSH_PROXY_HOST ]] ; then
-			    penzsh_echo "Note: If you see the errors 'no route to host' take note of the hosts which do not have that error. Even if they are not caught by this scan, the existence of a route (and not all routes) may indibate it is up anyway."
+			    penzsh_echo "Note: If you see the errors 'no route to host' take note of the hosts which do not have that error. Even if they are not caught by this scan, the existence of a route (and not all routes) may indicate it is up anyway."
 				penzsh_echo "Performing basic host discovery, standby..."
 				pzcore_func_require "which proxychains4" "sudo apt-get install proxychains4"
 				if [ "$?" = 0 ] ; then
@@ -331,7 +331,7 @@ function penzsh() {
 			;;
 #		proxystop)
 #			if [[ $PENZSH_PROXY_NET && !$PENZSH_PROXY_HOST ]] ; then
-#				kill $(bat $PENZSH_PROXY_NET_DIR/.penzsh_proxy_net/proxy_pid)
+#				kill $(cat $PENZSH_PROXY_NET_DIR/.penzsh_proxy_net/proxy_pid)
 #				rm $PENZSH_PROXY_NET_DIR/.penzsh_proxy_net/proxy_pid
 #			else
 #				penzsh_echo "This command is only available in immediate 'proxy_nets' subfolders!"
