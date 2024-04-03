@@ -45,8 +45,12 @@ function prompt_penzsh() {
 			pzsh_text="${PENZSH_TARGET}"
 		fi
 		
-		p10k segment -r -i ${pzsh_icon} -t ${pzsh_text} 2>/dev/null
+		# do this command to see all the colors
+		# -b is for background -f is foreground
+		# for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+		# todo add ability to choose custom colors
 
+		p10k segment -r -i ${pzsh_icon} -b 4 -f 1 -t ${pzsh_text} 2>/dev/null
 	fi
 }
 
