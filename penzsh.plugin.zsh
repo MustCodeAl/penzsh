@@ -60,7 +60,7 @@ function update_current_penzsh_vars() {
 	for var in $(env | egrep "^PENZSH_PROXY" | cut -d= -f1) ; do
 		unset ${var}
 	done
-	export PENZSH=false
+	export PENZSH=true
 	export PENZSH_PROXY_NET=false
 	export PENZSH_PROXY_HOST=false
 	# Are we in a penzsh project?
