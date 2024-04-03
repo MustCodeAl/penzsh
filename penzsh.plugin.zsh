@@ -46,6 +46,7 @@ function prompt_penzsh() {
 		fi
 		
 		p10k segment -r -i ${pzsh_icon} -t ${pzsh_text} 2>/dev/null
+
 	fi
 }
 
