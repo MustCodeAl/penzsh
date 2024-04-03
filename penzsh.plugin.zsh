@@ -110,7 +110,7 @@ function update_current_penzsh_vars() {
 update_current_penzsh_vars
 
 function penzsh_echo() {
-	echo "PENZSH >>> ${@}"
+	printf "\\033[31mPENZSH >>> %s\\033[0m\\n" "${@}"
 }
 
 # stolen from cmds/.core ...
@@ -133,9 +133,10 @@ function pzcore_func_require()
 	fi
 }
 
-function penzsh_cmd_do(){ true}
+# shellcheck disable=SC1073,SC1054,SC1055,SC1072
+function penzsh_cmd_do(){}
 
-function penzsh_cmd_info(){ true}
+function penzsh_cmd_info(){}
 
 
 function penzsh_create_host_dir() {
