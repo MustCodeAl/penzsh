@@ -72,18 +72,18 @@ function update_current_penzsh_vars() {
 	fc -P
 	local x=`pwd`
 	while [ "$x" != "/" ] ; do
-		if [ `fd -HI -d 1 -t d .penzsh` ] ; then
+		if [ `find "$x" -maxdepth 1 -name .penzsh -type d 2>/dev/null` ] ; then
 			export PENZSH=true
 			export PENZSH_DIR=$x
 			export PENZSH_DIR_META=$x/.penzsh
 			export PENZSH_FIRST_DIR=$x
 			export PENZSH_FIRST_TARGET=$(cat $x/.penzsh/target)
 			break
-		elif [ `fd -HI -d 1 -t d .penzsh_proxy_net` ] ; then
+		elif [ `find "$x" -maxdepth 1 -name .penzsh_proxy_net -type d 2>/dev/null` ] ; then
 			export PENZSH_PROXY_NET=true
 			export PENZSH_PROXY_NET_DIR=$x
 			export PENZSH_PROXY_NET_TARGET=$(cat $x/.penzsh_proxy_net/target)
-		elif [ `fd -HI -d 1 -t d .penzsh_proxy_host` ] ; then
+		elif [ `find "$x" -maxdepth 1 -name .penzsh_proxy_host -type d 2>/dev/null` ] ; then
 			export PENZSH_PROXY_HOST=true
 			export PENZSH_PROXY_HOST_DIR=$x
 		fi
